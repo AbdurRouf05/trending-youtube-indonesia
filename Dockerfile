@@ -7,7 +7,7 @@ ENV TZ=Asia/Jakarta \
     PYTHONUNBUFFERED=1
 
 WORKDIR /app
-COPY ambil_trending.py .
+COPY pengumpulan_data/ambil_trending.py .
 RUN mkdir -p data
 
 EXPOSE 8000

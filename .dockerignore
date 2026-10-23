@@ -1,5 +1,3 @@
-api_key.txt
-data/
-log.txt
-__pycache__/
-*.bat
+# Image hanya butuh script pengambil data
+*
+!pengumpulan_data/ambil_trending.py
