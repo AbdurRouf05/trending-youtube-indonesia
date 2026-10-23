@@ -11,7 +11,9 @@ Setiap pengambilan disimpan sebagai `trending_YYYY-MM-DD.csv` (±200 video per h
 | Path | Isi |
 |---|---|
 | `Kanban_Trending_YouTube.pdf` | Kanban board proyek (20 tugas, Backlog → Done) |
-| `Panduan_Pengumpulan_Data.md` | Panduan lengkap pengumpulan data (API key, script, jadwal, Coolify) |
+| `Rumusan_Masalah.md` | Pertanyaan penelitian, tujuan, batasan, dan manfaat (#04) |
+| `Panduan_Pengumpulan_Data.md` | Panduan lengkap pengumpulan data (API key, script, jadwal, Coolify, dataset pendukung) |
+| `analisis/preprocessing_eda.py` | PySpark: cleaning, feature engineering, EDA, dan labeling populer (#10–#13) |
 | `pengumpulan_data/ambil_trending.py` | Script pengambil data (hanya library bawaan Python 3) |
 | `pengumpulan_data/jalankan_harian.bat` | Pemanggil script untuk Windows Task Scheduler |
 | `Dockerfile` | Container untuk deploy di VPS (Coolify) + file server untuk mengunduh CSV |
@@ -27,6 +29,14 @@ python pengumpulan_data/ambil_trending.py
 ```
 
 Hasil tersimpan di `pengumpulan_data/data/`.
+
+Setelah data terkumpul, jalankan analisis (butuh Java 17+ dan `pip install pyspark matplotlib`):
+
+```bash
+python analisis/preprocessing_eda.py
+```
+
+Output (tabel fitur per video, tabel EDA, dan grafik) tersimpan di `analisis/output/`.
 
 ## Kolom data
 

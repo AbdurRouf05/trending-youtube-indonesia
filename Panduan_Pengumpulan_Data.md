@@ -387,13 +387,22 @@ Untuk mengambil data ke laptop, misalnya saat tahap #09:
 scp -r user@ip-vps:~/trending/data ./data
 ```
 
-### #08 – Cari dataset pendukung (Kaggle)
+### #08 – Cari dataset pendukung
 
-- Cari **"YouTube Trending Video Dataset"** di Kaggle.
-- Dataset yang populer di sana umumnya **tidak memuat Indonesia**. Negaranya antara lain India, Amerika, Inggris, Jepang, dan Korea. Jadi pakai sebagai **pembanding**, misalnya Indonesia dibandingkan dengan India.
-- Kolomnya mirip dengan CSV dari script (title, channel, category, publish time, tags, views, likes, comments), jadi mudah digabung.
+Hasil pencarian (23 Okt 2026):
 
-**Bukti selesai:** dataset terunduh.
+| Dataset | Indonesia? | Periode | Ukuran | Catatan |
+|---|---|---|---|---|
+| **Global YouTube Trending Dataset (2022–2025)**, Goncalves & Ng, University of Illinois. DOI: <https://doi.org/10.13012/B2IDB-9307654_V1> | **Ya (ID)** | 1 Jul 2022 – 30 Jun 2025, 4× sehari, 104 negara | ±26,4 GB (tar.bz2) | **Rekomendasi utama.** Dikumpulkan dengan metode yang **sama** dengan script kita (YouTube Data API v3, `chart=mostPopular` + `regionCode`). File utama `most_popular.csv` berisi kolom `collection_date`, `region_code`, `rank`, `video_id`, `channel_id`, `title`, `description`, `published_at`, `channel_title`, kategori, bahasa, views, comments, dan tabel tag terpisah. Tidak ada kolom like. |
+| Trending YouTube Video Statistics (Kaggle, datasnaek) | Tidak | 2017–2018 | Jauh lebih kecil | 10 negara (US, GB, DE, CA, FR, RU, MX, KR, JP, IN). Ringan, cocok kalau hanya butuh pembanding antar negara. |
+
+**Saran pemakaian dataset Illinois:**
+
+- Ukurannya besar (26 GB terkompresi). Jangan diunduh ke laptop. Unduh langsung di VPS, lalu filter `region_code = 'ID'` dengan Spark. Langkah ini sekaligus menjadi contoh nyata pemrosesan *big data* di laporan.
+- Gunakan untuk: (1) membandingkan pola Indonesia 2022–2025 dengan data kita tahun 2026, dan (2) menambah jumlah data training model. Catatan: kolom like tidak ada, jadi untuk gabungan data pakai fitur selain `rasio_like_view`.
+- Sitasi: Goncalves, A., & Ng, Y. M. M. (2026). *Global YouTube Trending Dataset (2022–2025): Three Years of Platform-Curated, Cross-National Trends in Digital Culture.* ICWSM 2026. arXiv:2510.23645.
+
+**Bukti selesai:** dataset terunduh (minimal subset Indonesia).
 
 ### #09 – Simpan data ke storage
 
